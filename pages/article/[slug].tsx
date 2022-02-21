@@ -4,25 +4,44 @@ import matter from "gray-matter";
 import styles from '../../styles/Article.module.css';
 import Markdown from "../../components/Markdown";
 import { ArticleInfo } from "../../@types/article";
+import { Sidebar } from "../../components/Sidebar";
+import Link from "next/link";
 
 interface IProps {
     article: ArticleInfo;
 }
 
 const Article: FunctionComponent<IProps> = ({ article }) => {
-	return <div className={styles.article}>
-        <div className={styles.thumbnail}>
-            <img src={article.meta.thumbnail} />
+    return (
+        <>
+            <div className="flex">
+                <aside className={"h-screen sticky top-0 bg-red-800 p-2"}>
+                    <Link href={`/`}>
+                        <div className={"rounded-sm bg-red-500 b-2 border-red-700 p-4"}>
+                            Home
+                        </div>
+                    </Link>
+                </aside>
 
-            <div className={styles.title}>
-                <h1>{article.meta.title}</h1>
+                <main className="w-screen">
+                    <div className={styles.article}>
+                        <div className={styles.thumbnail}>
+                            <img src={article.meta.thumbnail} />
+
+                            <div className={styles.title}>
+                                <h1>{article.meta.title}</h1>
+                            </div>
+                        </div>
+
+                        <div className={styles.content}>
+                            <Markdown content={article.content} />
+                        </div>
+                    </div>
+                </main>
             </div>
-        </div>
+        </>
 
-        <div className={styles.content}>
-            <Markdown content={article.content} />
-        </div>
-	</div>
+    )
 }
 
 export async function getStaticProps({ ...ctx }) {
@@ -56,7 +75,7 @@ export async function getStaticPaths() {
             slug: file.split('.')[0]
         }
     }))
-    
+
     return {
         paths,
         fallback: false,
