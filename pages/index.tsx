@@ -23,6 +23,7 @@ const Home: FunctionComponent<IProps> = ({ articles }) => {
 
 // TODO: Make this accessible multiple places
 // TOOD: So we can generate dynamic menus etc.
+
 export async function getStaticProps() {
     const files = fs.readdirSync("uploads");
     
