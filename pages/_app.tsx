@@ -1,12 +1,15 @@
 import '../styles/globals.css'
-import type {AppProps} from 'next/app'
-import {Sidebar} from "../components/Sidebar";
+import type { AppProps } from 'next/app'
+import { Sidebar } from "../components/Sidebar";
 
-function MyApp({Component, pageProps}: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
-            <Sidebar/>
-            <Component {...pageProps} />
+            <div className="flex">
+                <Sidebar />
+                <Component {...pageProps} />
+            </div>
+
         </>
     )
 }
